@@ -16,4 +16,8 @@ public interface IStudentDao {
 
 	Student selectOneStudent(SqlSession session, int no);
 
+	int deleteStudent(SqlSession session, Student student);
+
+	int updateStudent(SqlSession session, Student student);
+
 }

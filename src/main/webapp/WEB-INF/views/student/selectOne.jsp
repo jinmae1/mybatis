@@ -78,6 +78,51 @@ table.tbl-student tr:last-of-type td:first-child{text-align:center;}
 		
 	</div>
 <script>
+	
+const deleteStudent = () => {
+	$.ajax({
+		url: "${ pageContext.request.contextPath }/student/studentDelete.do",
+		method: "POST",
+		data : {
+			no : $("[name=no]", document.studentUpdateFrm).val()
+		},
+		dataType : "json",
+		success(data){
+			console.log(data);
+			alert(data.msg);
+		},
+		error : function(xhr, status, err){
+			console.log(xhr, status, err);
+		},
+		complete : function(){
+			$(document.studentUpdateFrm)[0].reset();
+			$("[name=no]", document.selectOneStudentFrm).val('');
+		}
+	});
+};
+
+const updateStudent = () => {
+	const $frm = $(document.studentUpdateFrm);
+	
+	$.ajax({
+		url: "${ pageContext.request.contextPath }/student/studentUpdate.do",
+		method : "POST",
+		data : $frm.serialize(),
+		dataType : "json",
+		success(data){
+			console.log(data);
+			alert(data.msg);
+		},
+		error : function(xhr, status, err){
+			console.log(xhr, status, err);
+		},
+		complete : function(){
+			$frm[0].reset();
+			$("[name=no]", document.selectOneStudentFrm).val('');
+		}
+	});
+};
+
 /**
  * 학생1명정보 조회
  */
@@ -92,6 +137,16 @@ $(document.selectOneStudentFrm).submit((e) => {
 		data: {no},	// {no : no}
 		success(res){
 			console.log(res);
+ 			if(res == null) {
+				alert(`해당 학생은 존재하지 않습니다.`);
+				return;
+			}
+			
+			const {no, name, tel} = res;
+			const $frm = $(document.studentUpdateFrm);
+			$("[name=no]", $frm).val(no);
+			$("[name=name]", $frm).val(name);
+			$("[name=tel]", $frm).val(tel);
 		},
 		error: console.log
 	})
