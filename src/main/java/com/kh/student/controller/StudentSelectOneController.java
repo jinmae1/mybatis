@@ -9,22 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.common.AbstractController;
 import com.kh.student.model.service.IStudentService;
 
-public class StudentSelectListController extends AbstractController {
+public class StudentSelectOneController extends AbstractController {
 
 	private IStudentService studentService;
-	
-	public StudentSelectListController(IStudentService studentService) {
+
+	public StudentSelectOneController(IStudentService studentService) {
 		super();
 		this.studentService = studentService;
-		System.out.println("[StudentSelectListController] studentService = " + studentService);
 	}
-
-
 
 	@Override
 	public String doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		return "student/selectList";
+		return "student/selectOne";
 	}
-	
 	
 }

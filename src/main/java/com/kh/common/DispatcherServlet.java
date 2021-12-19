@@ -14,6 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.student.model.dao.IStudentDao;
+import com.kh.student.model.dao.StudentDao;
+import com.kh.student.model.service.IStudentService;
+import com.kh.student.model.service.StudentService;
+
 /**
  * servlet의 생명주기 : tomcat
  * 생성자호출 - init - service(doGet/doPost) - destroy
@@ -30,6 +35,10 @@ public class DispatcherServlet extends HttpServlet {
      * - /student/studentEnroll.do ---> com.kh.student.controller.StudentEnrollController
      */
     public DispatcherServlet() throws Exception {
+    	// 0. 의존객체 준비
+    	IStudentDao studentDao = new StudentDao();
+    	IStudentService studentService = new StudentService(studentDao); // 의존 주입
+    	
     	// 1. url-command.properties -> Properties객체
     	Properties prop = new Properties();
     	String filepath = DispatcherServlet.class.getResource("/url-command.properties").getPath();
@@ -42,9 +51,9 @@ public class DispatcherServlet extends HttpServlet {
     		
     		// reflection api
     		Class<?> clz = Class.forName(className);
-    		Class<?>[] param = null; // 생성자인자로 전달될 타입
-    		Constructor<?> constructor = clz.getDeclaredConstructor(param); // 기본생성자
-    		Object[] args = null;
+    		Class<?>[] param = {IStudentService.class}; // 생성자인자로 전달될 타입
+    		Constructor<?> constructor = clz.getDeclaredConstructor(param); // 파라미터생성자
+    		Object[] args = {studentService};
     		AbstractController controller = (AbstractController) constructor.newInstance(args);
     		urlCommandMap.put(url, controller);
     	}

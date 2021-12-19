@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="com.kh.common.DispatcherServlet" project="hello-mybatis" 
     file="/hello-mybatis/src/main/java/com/kh/common/DispatcherServlet.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="449" y="229"/>    
+    <position height="-1" width="-1" x="445" y="215"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -45,8 +45,12 @@
   </generalization>  
   <association id="6">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="7" name="urlCommandMap"/>      
-      <multiplicity id="8" minimum="0" maximum="2147483647"/>    
+      <attribute id="7" name="urlCommandMap">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="8" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
