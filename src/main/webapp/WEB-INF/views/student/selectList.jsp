@@ -57,19 +57,14 @@ table.tbl-student th,table.tbl-student td{
 		</tr>
 		</thead>
 		<tbody>
-			<c:if test="${empty list}">
-				<tr><td colspan="14">검색결과가 존재하지 않습니다.</td></tr>
-			</c:if>
-			<c:if test="${not empty list}">
-				<c:forEach items="${mapList}" var="student" varStatus="vs">
-					<tr>
-						<td>${student.no}</td>
-						<td>${student.name}</td>
-						<td>${student.tel}</td>
-						<td><fmt:formatDate value="${student.regDate}" pattern="yyyy-MM-dd"/></td>
-					</tr>
-				</c:forEach>
-			</c:if>
+			<c:forEach items="${mapList}" var="student" varStatus="vs">
+				<tr>
+					<td>${student.no}</td>
+					<td>${student.name}</td>
+					<td>${student.tel}</td>
+					<td><fmt:formatDate value="${student.regDate}" pattern="yyyy-MM-dd"/></td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

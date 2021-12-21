@@ -32,11 +32,11 @@ div#search-container{
 			<select name="searchType" required>
 				<option value="">검색타입</option>
 				<!-- required여부를 판단할 value="" 반드시 있어야함.-->
-				<option value="emp_id" ${searchType eq 'emp_id' ? 'selected' : ''}>사번</option>
-				<option value="emp_name" ${searchType eq 'emp_name' ? 'selected' : ''}>사원명</option>
-				<option value="email" ${searchType eq 'email' ? 'selected' : ''}>이메일</option>
-				<option value="phone" ${searchType eq 'phone' ? 'selected' : ''}>전화번호</option>
-			</select>
+				<option value="emp_id">사번</option>
+				<option value="emp_name">사원명</option>
+				<option value="email">이메일</option>
+				<option value="phone">전화번호</option>
+ 			</select>
 			<input type="search" name="searchKeyword" required value="${searchKeyword}"/>	
 			<input type="submit" value="검색" />
 		</form>
@@ -63,28 +63,39 @@ div#search-container{
 		</thead>
 		<!-- 조회된 데이터가 있는 경우와 없는 경우를 분기처리 하세요 -->
 		<tbody>
-			<c:forEach items="${list}" var="emp" varStatus="vs">
-				<tr>
-					<td>${vs.count}</td>
-					<td>${emp.empId}</td>
-					<td>${emp.empName}</td>
-					<td>${fn:substring(emp.empNo, 0, 8)}******</td>
-					<td>${emp.email}</td>
-					<td>${emp.phone}</td>
-					<td>${emp.deptCode}</td>
-					<td>${emp.jobCode}</td>
-					<td>${emp.salLevel}</td>
-					<fmt:setLocale value="ko_kr"/>
-					<td><fmt:formatNumber value="${emp.salary}" type="currency"/></td>
-					<td><fmt:formatNumber value="${emp.bonus}" pattern="#%"/></td>
-					<td>${emp.managerId}</td>
-					<td><fmt:formatDate value="${emp.hireDate}" pattern="yyyy/MM/dd"/></td>
-					<td>${emp.quitYn}</td>
-				</tr>
-			</c:forEach>
+			<c:if test="${empty list}">
+				<tr><td colspan="14">검색결과가 존재하지 않습니다.</td></tr>
+			</c:if>
+			<c:if test="${not empty list}">
+				<c:forEach items="${list}" var="emp" varStatus="vs">
+					<tr>
+						<td>${vs.count}</td>
+						<td>${emp.empId}</td>
+						<td>${emp.empName}</td>
+						<td>${fn:substring(emp.empNo, 0, 8)}******</td>
+						<td>${emp.email}</td>
+						<td>${emp.phone}</td>
+						<td>${emp.deptCode}</td>
+						<td>${emp.jobCode}</td>
+						<td>${emp.salLevel}</td>
+						<fmt:setLocale value="ko_kr"/>
+						<td><fmt:formatNumber value="${emp.salary}" type="currency"/></td>
+						<td><fmt:formatNumber value="${emp.bonus}" pattern="#%"/></td>
+						<td>${emp.managerId}</td>
+						<td><fmt:formatDate value="${emp.hireDate}" pattern="yyyy/MM/dd"/></td>
+						<td>${emp.quitYn}</td>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</tbody>
 	</table>
 </div>
+
+<script>
+	document.querySelectorAll("select[name='searchType'] > option").forEach((option, _) => {
+		option.selected = option.value  == '${searchType}'; 
+	});
+</script>
 
 </body>
 </html>
