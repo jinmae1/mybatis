@@ -61,5 +61,23 @@
 		<result column="reg_date" property="regDate" jdbcType="DATE" javaType="java.sql.Date"/>	
 	</resultMap>
 	
+	<update id="updateStudent">
+		update
+			student
+		set
+			name = #{name},
+			tel = #{tel}
+		where 
+			no = #{no}
+	</update>
+	
+	<delete id="deleteStudent">
+		delete from 
+			student 
+		where 
+			no = #{no}
+	</delete>
+	
+	
 </mapper>
 

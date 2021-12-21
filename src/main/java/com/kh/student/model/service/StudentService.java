@@ -68,5 +68,36 @@ public class StudentService implements IStudentService {
 	}
 	
 	
-	
+	@Override
+	public int updateStudent(Student student) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try {
+			result = studentDao.updateStudent(session, student);
+			session.commit();
+		} catch(Exception e) {
+			session.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteStudent(int no) {
+		int result = 0;
+		SqlSession session = getSqlSession();
+		try {
+			result = studentDao.deleteStudent(session, no);
+			session.commit();
+		} catch(Exception e) {
+			session.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+		return result;
+	}
+
 }

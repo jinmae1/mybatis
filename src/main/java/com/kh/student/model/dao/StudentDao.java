@@ -29,6 +29,15 @@ public class StudentDao implements IStudentDao {
 		return session.selectOne("student.selectOneStudent", no);
 	}
 
-	
+	@Override
+	public int updateStudent(SqlSession session, Student student) {
+		return session.update("student.updateStudent", student);
+	}
+
+	@Override
+	public int deleteStudent(SqlSession session, int no) {
+		return session.delete("student.deleteStudent", no);
+	}
+
 	
 }
