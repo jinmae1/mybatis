@@ -7,4 +7,6 @@ public interface EmpService {
 
 	List<Map<String, Object>> selectEmpMapList();
 
+	List<Map<String, Object>> search1(Map<String, Object> param);
+
 }

@@ -1,7 +1,7 @@
 --=====================================================
 -- hello-mybatis
 --=====================================================
--- student table?��?��
+-- student table생성
 create table student(
     no number,
     name varchar2(50) not null,

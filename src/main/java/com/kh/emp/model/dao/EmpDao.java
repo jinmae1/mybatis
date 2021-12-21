@@ -9,4 +9,6 @@ public interface EmpDao {
 
 	List<Map<String, Object>> selectEmpMapList(SqlSession session);
 
+	List<Map<String, Object>> search1(SqlSession session, Map<String, Object> param);
+
 }

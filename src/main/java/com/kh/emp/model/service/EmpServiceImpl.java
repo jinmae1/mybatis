@@ -24,6 +24,14 @@ public class EmpServiceImpl implements EmpService {
 		session.close();
 		return empMap;
 	}
+
+	@Override
+	public List<Map<String, Object>> search1(Map<String, Object> param) {
+		SqlSession session = getSqlSession();
+		List<Map<String, Object>> list = empDao.search1(session, param);
+		session.close();
+		return list;
+	}
 	
 	
 }

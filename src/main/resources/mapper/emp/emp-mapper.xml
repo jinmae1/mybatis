@@ -28,6 +28,20 @@
 			kh.employee
 	</select>
 	
+	<!-- 
+		${} : 식별자(홑따옴표 없이 전달한 값을 그대로 출력
+		#{} : 값(타입별 형변환)
+	 -->
+	
+	<select id="search1" resultMap="empMap">
+		select
+			*
+		from 
+			kh.employee
+		where
+			${searchType} like '%' || #{searchKeyword} || '%'
+	</select>
+	
 	
 </mapper>
 
