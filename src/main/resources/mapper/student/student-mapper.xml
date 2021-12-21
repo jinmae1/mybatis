@@ -61,6 +61,53 @@
 		<result column="reg_date" property="regDate" jdbcType="DATE" javaType="java.sql.Date"/>	
 	</resultMap>
 	
+	<!-- 첫번째 방법 -->
+	<select id="selectOneStudentMap0" resultType="map">
+		select
+			no as "no",
+			name as "name",
+			tel as "tel",
+			reg_date as "regDate"
+		from
+			student
+		where
+			no = #{no}
+	</select>
+
+	<select id="selectOneStudentMap" resultMap="studentMap">
+		select
+			*
+		from
+			student
+		where
+			no = #{no}
+	</select>
+	<resultMap type="map" id="studentMap">
+		<id column="no" property="no" />
+		<result column="name" property="name"/>
+		<result column="tel" property="tel"/>
+		<result column="reg_date" property="regDate" javaType="java.sql.Date"/>
+	</resultMap>
+	
+	<select id="selectStudentList" resultType="student">
+		select
+			*
+		from
+			student
+		order by
+			no desc
+	</select>
+	
+	<!-- 여기서 resultMap은 -15번째 라인에 이미 있기 때문에 재사용 가능 -->
+	<select id="selectStudentMapList" resultMap="studentMap">
+		select
+			*
+		from
+			student
+		order by
+			no desc
+	</select>
+	
 	<update id="updateStudent">
 		update
 			student

@@ -7,6 +7,12 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/student/studentEnroll.do">/student/studentEnroll.do</a></li>
 		<li><a href="${pageContext.request.contextPath}/student/selectOne.do">/student/selectOne.do</a></li>
+		<li><a href="${pageContext.request.contextPath}/student/selectList.do">/student/selectList.do</a></li>
+	</ul>
+	
+	<h2>emp</h2>
+	<ul>
+		<li><a href="${pageContext.request.contextPath}/emp/empSearch1.do">/empSearch1.do</a></li>
 	</ul>
 	
 </body>
