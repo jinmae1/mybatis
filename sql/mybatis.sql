@@ -30,7 +30,7 @@ select * from kh.department;
 select * from kh.job;
 
 -- kh계정 권한부여
-grant select on kh.employee to ot1b;
+grant all on kh.employee to ot1b;
 grant select on kh.department to ot1b;
 grant select on kh.job to ot1b;
 
@@ -44,3 +44,15 @@ create synonym job for jh.job;
 -- system계정
 grant create synonym to ot1b;
 -- 현재 공용db 사용중이라 create synonym 사용 불가
+
+select 
+			*
+		from (
+			select
+				kh.employee.*,
+				(select job_name from kh.job where job_code = kh.employee.job_code) job_name,
+				(select dept_title from kh.department where dept_id = kh.employee.dept_code) dept_title,
+				decode(substr(emp_no, 8, 1), '1', '남', '3', '남', '여') gender
+			from
+				kh.employee
+		);

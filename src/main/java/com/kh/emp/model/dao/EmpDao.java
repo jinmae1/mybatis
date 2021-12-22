@@ -17,4 +17,10 @@ public interface EmpDao {
 
 	List<Map<String, Object>> search3(SqlSession session, Map<String, Object> param);
 
+	Map<String, Object> selectOneEmpMap(SqlSession session, Map<String, Object> param);
+
+	List<Map<String, String>> selectDeptList(SqlSession session);
+
+	int updateEmp(SqlSession session, Map<String, Object> param);
+
 }

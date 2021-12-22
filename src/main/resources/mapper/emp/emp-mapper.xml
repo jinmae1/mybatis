@@ -134,5 +134,48 @@
 		</where> 
 	</select>
 	
+	<select id="selectOneEmpMap" resultMap="empMap">
+		select 
+			*
+		from (
+			select
+				kh.employee.*,
+				(select job_name from kh.job where job_code = kh.employee.job_code) as job_name,
+				(select dept_title from kh.department where dept_id = kh.employee.dept_code) as dept_title,
+				decode(substr(emp_no, 8, 1), '1', '남', '3', '남', '여') as gender
+			from
+				kh.employee
+		)
+		where
+			emp_id = #{empId} 
+	</select>
+	
+	<select id="selectDeptList" resultType="map">
+		select
+			dept_id as "deptId",
+			dept_title as "deptTitle"
+		from
+			kh.department
+	</select>
+	
+	<!-- 
+		set
+			태그내부 마지막에 위치한 ,을 제거
+	 -->
+	<update id="updateEmp">
+		update
+			kh.employee
+		<set>
+			<if test="jobCode != null and jobCode != ''">
+				job_code = #{jobCode},
+			</if>
+			<if test="deptCode != null and deptCode != ''">
+				dept_code = #{deptCode}
+			</if>
+		</set>
+		where
+			emp_id = #{empId}
+	</update>
+	
 </mapper>
 

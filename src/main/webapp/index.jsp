@@ -14,6 +14,7 @@
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/emp/empSearch1.do">/empSearch1.do</a></li>
 		<li><a href="${pageContext.request.contextPath}/emp/empSearch2.do">/empSearch2.do</a></li>
+		<li><a href="${pageContext.request.contextPath}/emp/empSearch3.do">/empSearch3.do</a></li>
 	</ul>
 	
 </body>
