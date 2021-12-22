@@ -17,8 +17,8 @@
 		<result column="salary" property="salary"/>
 		<result column="bonus" property="bonus"/>
 		<result column="manager_id" property="managerId"/>
-		<result column="hire_date" property="hireDate" javaType="java.sql.Date"/>
-		<result column="quit_date" property="quitDate" javaType="java.sql.Date"/>
+		<result column="hire_date" property="hireDate"/>
+		<result column="quit_date" property="quitDate"/>
 		<result column="quit_yn" property="quitYn"/>
 	</resultMap>
 	
@@ -70,7 +70,7 @@
 				and gender = #{gender}
 		  	</if>	
 		  	<if test="salary != null and salary != ''">
-		  		<if test="salaryCompare != null and salarycompare != ''">
+		  		<if test="salaryCompare != null and salaryCompare != ''">
 		  			<choose>
 		  				<when test="salaryCompare eq 'ge'">
 						  and salary <![CDATA[ >= ]]> #{salary}
@@ -81,6 +81,18 @@
 		  			</choose>
 		  		</if>
 		  	</if>
+			<if test="hireDate != null and hireDate != ''">
+				<if test="hiredateCompare != null and hiredateCompare != ''">
+					<choose>
+						<when test="hiredateCompare eq 'le'">
+							and hire_date <![CDATA[ <= ]]> to_date(#{hireDate}, 'yyyy-MM-dd')
+						</when>
+						<when test="hiredateCompare eq 'ge'">
+							and hire_date <![CDATA[ >= ]]> to_date(#{hireDate}, 'yyyy-MM-dd')
+						</when>
+					</choose>
+				</if>
+			</if>
 		</where>
 	</select>
 	

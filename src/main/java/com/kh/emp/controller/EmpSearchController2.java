@@ -35,6 +35,8 @@ public class EmpSearchController2 extends AbstractController {
 		param.put("gender", request.getParameter("gender")); // 여기서 두번째 인자는 null일 수 있다.
 		param.put("salary", request.getParameter("salary")); // null이거나 ''일 수 있다. input type에 따라서 값이 없어도 빈문자열이 전달되기 때문
 		param.put("salaryCompare", request.getParameter("salaryCompare")); // null이거나 ''일 수 있다. input type에 따라서 값이 없어도 빈문자열이 전달되기 때문
+		param.put("hireDate", request.getParameter("hireDate"));
+		param.put("hiredateCompare", request.getParameter("hiredateCompare"));
 		System.out.println("[EmpSearchController2] param = " + param);
 
 		// 2. 업무로직
