@@ -9,6 +9,10 @@
 	String[] jobCode = request.getParameterValues("jobCode");
 	List<String> jobCodeList = jobCode != null ? Arrays.asList(jobCode) : null;
 	pageContext.setAttribute("jobCodeList", jobCodeList);
+	
+	String[] deptCode = request.getParameterValues("deptCode");
+	List<String> deptCodeList = deptCode != null ? Arrays.asList(deptCode) : null;
+	pageContext.setAttribute("deptCodeList", deptCodeList);
 %>
 <!DOCTYPE html>
 <html>
@@ -47,11 +51,23 @@ table#tbl-search td {text-align:left;}
 					<th>직급</th>
 					<td>
 						<c:forEach items="${jobList}" var="job" varStatus="vs">
-							<input type="checkbox" name="jobCode" id="jobCode${vs.count}" value="${job.jobCode}" ${jobCodeList.contains(job.jobCode) ? 'checked' : ''}/>
-							<label for="jobCode${vs.count}">${job.jobName}</label>
-							
-							<%--  aramValues.jobCode[i]} --%>
-							<c:if test="${vs.count % 3 eq 0}">
+ 							<input type="checkbox" name="jobCode" id="jobCode${vs.count}" value="${job.jobCode}" ${jobCodeList.contains(job.jobCode) ? 'checked' : ''}/>
+ 							<label for="jobCode${vs.count}">${job.jobName}</label>
+ 							<c:if test="${vs.count % 3 eq 0}">
+								<br />
+							</c:if>
+						</c:forEach>
+					</td>
+				</tr>
+
+				<!-- @실습문제 : 부서코드도 함께 조회(부서배정이 안된 사원도 조회되도록 할것) -->
+				<tr>
+					<th>부서</th>
+					<td>
+						<c:forEach items="${deptList}" var="dept" varStatus="vs">
+							<input type="checkbox" name="deptCode" id="deptCode${vs.count}" value="${dept.deptId}" ${deptCodeList.contains(dept.deptId) ? 'checked' : ''}/>
+ 							<label for="deptCode${vs.count}">${dept.deptTitle}</label>
+ 							<c:if test="${vs.count % 3 eq 0}">
 								<br />
 							</c:if>
 						</c:forEach>

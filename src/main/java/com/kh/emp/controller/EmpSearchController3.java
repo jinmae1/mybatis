@@ -32,6 +32,15 @@ public class EmpSearchController3 extends AbstractController {
 		// 반복접근 가능한 객체: T[], List<T>, Set<T>, Map<K, V>
 		Map<String, Object> param = new HashMap<>();
 		param.put("jobCode", request.getParameterValues("jobCode"));
+		param.put("deptCode", request.getParameterValues("deptCode"));
+		
+		try {
+			if("D0".equals(request.getParameterValues("deptCode")[0])) {
+				param.put("internCode", "D0");
+			}
+		} catch(NullPointerException e) {
+			// pass
+		}
 		System.out.println("[EmpSearchController3] param = " + param);
 		
 		// 2. 업무로직
@@ -39,12 +48,17 @@ public class EmpSearchController3 extends AbstractController {
 		List<Map<String, String>> jobList = empService.selectJobList();
 		System.out.println("[EmpSearchController3] jobList = " + jobList);
 		
+		// 부서코드-부서명 조회
+		List<Map<String, String>> deptList = empService.selectDeptList();
+		System.out.println("[EmpSearchController3] deptList = " + deptList);
+		
 		// 검색
 		List<Map<String, Object>> list = empService.search3(param);
 		System.out.println("[EmpSearchController3] list = " + list);
 		
 		// 3. jsp 위임
 		request.setAttribute("jobList", jobList);
+		request.setAttribute("deptList", deptList);
 		request.setAttribute("list", list);
 
 		return "emp/search3";
