@@ -43,8 +43,6 @@ public class EmpSearchController1 extends AbstractController {
 			list = empService.selectEmpMapList();
 		} else {
 			list = empService.search1(param);
-			request.setAttribute("searchType", searchType);
-			request.setAttribute("searchKeyword", searchKeyword);
 		}
 		System.out.println("[EmpSearchController1] list = " + list);
 		

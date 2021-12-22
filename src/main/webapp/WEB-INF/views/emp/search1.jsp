@@ -37,7 +37,7 @@ div#search-container{
 				<option value="email">이메일</option>
 				<option value="phone">전화번호</option>
  			</select>
-			<input type="search" name="searchKeyword" required value="${searchKeyword}"/>	
+			<input type="search" name="searchKeyword" required value="${param.searchKeyword}"/>	
 			<input type="submit" value="검색" />
 		</form>
 	</div>
@@ -93,7 +93,7 @@ div#search-container{
 
 <script>
 	document.querySelectorAll("select[name='searchType'] > option").forEach((option, _) => {
-		option.selected = option.value  == '${searchType}'; 
+		option.selected = option.value  == '${param.searchType}'; 
 	});
 </script>
 
